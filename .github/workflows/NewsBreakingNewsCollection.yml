@@ -1,0 +1,56 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: NewsBreakingNewsCollection
+
+# on
+# 어떤 조건일때 파일을 실행 시킬지
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+# 
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+
+    #필요한 라이브러리들을 설치하기
+    - name : library install
+      run: | 
+         pip install requests
+         pip install beautifulsoup4
+         pip install pandas
+         pip install lxml
+      
+    #내가 만든 파이썬 파일을 실행
+    - name: run my file
+      run: |
+        python3 gitActionNewsData.py
+
+    #커밋
+    - name: commits
+      run: |
+        git config --global user.email "ghosthello@naver.com"
+        git config --global user.name "Junhong"
+        git add newsTitle.csv
+        git commit -m "newsDataCollection"
+
+    #푸쉬
+    - name: push
+      uses : ad-m/github-push-action@master
+      with :
+        branch : "main"
+        github token : $        
