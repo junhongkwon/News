@@ -19,4 +19,4 @@ for j in range(1, 11, 1):
 
 dic = {"newsTitle" : titleList}
 df = pd.DataFrame(dic)
-df.to_csv("/Users/junhong/Desktop/STUDY/Python/12시간 안에 끝내는 파이썬을 활용한 크롤링/newsTitle.csv", encoding="utf-8-sig", index=False)
+df.to_csv("newsTitle.csv", encoding="utf-8-sig", index=False)
