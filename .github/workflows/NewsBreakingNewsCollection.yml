@@ -11,6 +11,12 @@ on:
   pull_request:
     branches: [ "main" ]
 
+
+# workflow permissions 설정
+permissions:
+  contents: write  # 파일을 읽고 쓸 수 있도록 설정
+  actions: read 
+
 # 
 jobs:
   build:
